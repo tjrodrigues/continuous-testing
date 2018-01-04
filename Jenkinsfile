@@ -21,12 +21,10 @@ stage('Unit Test & Satic Analysis') {
 		},
 		"SonarQube" : { 
 			node ('testEnv') {   
-				//def mvnHome
-				//mvnHome = tool 'M3'
 				sh "echo Executing SonarQube Analysis..." 
-				//checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'CloneOption', depth: 0, noTags: false, reference: '', shallow: false, timeout: 30]], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/tjrodrigues/continuousTesting.git']]])
-				withSonarQubeEnv('SonarQube') {
-					withMaven(maven: 'maven3') {
+				git 'https://github.com/tjrodrigues/continuous-testing.git'
+				withSonarQubeEnv('SonarQube'){
+					withMaven(maven: 'maven3'){
 						sh "mvn -f spring-petclinic-rest-master/pom.xml $SONAR_MAVEN_GOAL -Dsonar.host.url=$SONAR_HOST_URL"
 					}
 				} 
