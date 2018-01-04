@@ -5,7 +5,7 @@ stage ('Build'){
 		
 		withMaven(maven: 'maven3') {
         // some block
-			sh "mvn clean install"
+			sh "mvn clean install -f spring-petclinic-rest-master/pom.xml"
 		}
 
 		
