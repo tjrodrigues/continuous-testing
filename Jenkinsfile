@@ -24,7 +24,7 @@ stage('Unit Test & Satic Analysis') {
 				sh "echo Executing SonarQube Analysis..." 
 				withSonarQubeEnv('SonarQube'){
 					withMaven(maven: 'maven3'){
-						sh "mvn clean install -f spring-petclinic-rest-master/pom.xml $SONAR_MAVEN_GOAL -Dsonar.host.url=$SONAR_HOST_URL"
+						sh "mvn clean install -f spring-petclinic-rest-master/pom.xml -DskipTests $SONAR_MAVEN_GOAL -Dsonar.host.url=$SONAR_HOST_URL"
 					}
 				} 
 			} 
