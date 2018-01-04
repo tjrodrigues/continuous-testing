@@ -3,7 +3,7 @@ stage ('Build'){
 		sh "echo Checking out and build solution..."
 		git 'https://github.com/tjrodrigues/continuous-testing.git'
 		withMaven(maven: 'maven3') {
-			sh "mvn clean install -f spring-petclinic-rest-master/pom.xml"
+			sh "mvn clean install -f spring-petclinic-rest-master/pom.xml -DskipTests"
 		}
 	}
 }
