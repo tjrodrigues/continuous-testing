@@ -31,3 +31,10 @@ stage('Unit Test & Satic Analysis') {
 		}
 	)
 }
+
+stage ('Packaging'){
+	node('testEnv'){
+		sh "echo Create distribution package and save it to Nexus"
+
+	}
+}
