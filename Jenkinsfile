@@ -37,7 +37,7 @@ stage ('Packaging'){
 	node('testEnv'){
 		sh "echo Create distribution package and save it to Nexus"
 		withMaven(maven: 'maven3'){
-			sh "mvn package -DskipTests -f spring-petclinic-reactjs-master/pom.xml"
+			//sh "mvn clean package -DskipTests -f spring-petclinic-reactjs-master/pom.xml"
 		}
 
 	}
