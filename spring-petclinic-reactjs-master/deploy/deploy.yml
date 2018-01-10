@@ -6,18 +6,18 @@
   tasks:
    - name: Creating deployment folder structure
      shell: |
-       rm -rf $HOME/petclinic
-       mkdir -p $HOME/petclinic
+       rm -rf /home/{{user}}/petclinic
+       mkdir -p /home/{{user}}/petclinic
    - name: Get distribution package from Nexus
      shell: |
-       wget http://{{nexusserver}}/repository/maven-releases/org/criticalsoftware/sspa/petclinic/{{appversion}}/petclinic-{{appversion}}.tar.gz -O /$HOME/petclinic/
-       chmod +x mkdir -p $HOME/petclinic/petclinic-{{appversion}}.tar.gz
-       tar -xvf $HOME/petclinic/petclinic-{{appversion}}.tar.gz
+       wget http://{{nexusserver}}/repository/maven-releases/org/criticalsoftware/sspa/petclinic/{{appversion}}/petclinic-{{appversion}}.tar.gz -O //home/{{user}}/petclinic/petclinic-{{appversion}}.tar.gz
+       chmod +x mkdir -p /home/{{user}}/petclinic/petclinic-{{appversion}}.tar.gz
+       tar -xvf /home/{{user}}/petclinic/petclinic-{{appversion}}.tar.gz
    - name: Starting application...
      shell: |
-        $HOME/petclinic/petclinic-{{appversion}}/mvnw spring-boot:run
-        $HOME/petclinic/petclinic-{{appversion}}/client/npm install
-        $HOME/petclinic/petclinic-{{appversion}}/client/PORT=4444 npm start
+        /home/{{user}}/petclinic/petclinic-{{appversion}}/mvnw spring-boot:run
+        /home/{{user}}/petclinic/petclinic-{{appversion}}/client/npm install
+        /home/{{user}}/petclinic/petclinic-{{appversion}}/client/PORT=4444 npm start
         
 
    
