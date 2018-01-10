@@ -38,7 +38,7 @@ stage ('Packaging'){
 		sh "echo Create distribution package and save it to Nexus"
 		//sh "mvn clean package -DskipTests -f spring-petclinic-reactjs-master/pom.xml"
 		sh "echo ************************** ${WORKSPACE}/spring-petclinic-reactjs-master/target/petclinic-dist.tar.gz"
-		nexusArtifactUploader artifacts: [[artifactId: 'petclinic', classifier: '', file: ${WORKSPACE}'/spring-petclinic-reactjs-master/target/petclinic-dist.tar.gz', type: 'tar.gz']], credentialsId: 'Nexus', groupId: 'org.criticalsoftware.sspa', nexusUrl: '192.168.3.22:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-snapshots', version: '1.4.0-SNAPSHOT'
+		nexusArtifactUploader artifacts: [[artifactId: 'petclinic', classifier: '', file: "${WORKSPACE}/spring-petclinic-reactjs-master/target/petclinic-dist.tar.gz", type: 'tar.gz']], credentialsId: 'Nexus', groupId: 'org.criticalsoftware.sspa', nexusUrl: '192.168.3.22:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-snapshots', version: '1.4.0-SNAPSHOT'
 
 	}
 }
