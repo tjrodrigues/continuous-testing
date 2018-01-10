@@ -36,7 +36,7 @@ stage('Unit Test & Satic Analysis') {
 stage ('Packaging'){
 	node('testEnv'){
 		sh "echo Create distribution package and save it to Nexus"
-		nexusArtifactUploader artifacts: [[artifactId: 'petclinic', classifier: '', file: "${WORKSPACE}/spring-petclinic-reactjs-master/target/petclinic-dist.tar.gz", type: 'tar.gz']], credentialsId: 'Nexus', groupId: 'org.criticalsoftware.sspa', nexusUrl: '192.168.3.11:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-snapshots', version: '1.4.0-SNAPSHOT'
+		nexusArtifactUploader artifacts: [[artifactId: 'petclinic', classifier: '', file: "${WORKSPACE}/spring-petclinic-reactjs-master/target/petclinic-dist.tar.gz", type: 'tar.gz']], credentialsId: 'Nexus', groupId: 'org.criticalsoftware.sspa', nexusUrl: '192.168.3.11:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-releases', version: "1.4.${BUILD_NUMBER}"
 
 	}
 }
