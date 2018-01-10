@@ -1,0 +1,2 @@
+[local-env]
+localhost ansible_connection=local

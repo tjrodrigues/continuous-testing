@@ -1,0 +1,23 @@
+---
+# Petclinic deployment procedure
+- hosts: local-env
+  become: yes
+  become_method: sudo 
+  tasks:
+   - name: Creating deployment folder structure
+     shell: |
+       rm -rf $HOME/petclinic
+       mkdir -p $HOME/petclinic
+   - name: Get distribution package from Nexus
+     shell: |
+       wget http://{{nexusserver}}/repository/maven-releases/org/criticalsoftware/sspa/petclinic/{{appversion}}/petclinic-{{appversion}}.tar.gz -O /$HOME/petclinic/
+       chmod +x mkdir -p $HOME/petclinic/petclinic-{{appversion}}.tar.gz
+       tar -xvf $HOME/petclinic/petclinic-{{appversion}}.tar.gz
+   - name: Starting application...
+     shell: |
+        $HOME/petclinic/petclinic-{{appversion}}/mvnw spring-boot:run
+        $HOME/petclinic/petclinic-{{appversion}}/client/npm install
+        $HOME/petclinic/petclinic-{{appversion}}/client/PORT=4444 npm start
+        
+
+   
