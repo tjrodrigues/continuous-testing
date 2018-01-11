@@ -40,3 +40,20 @@ stage ('Packaging'){
 
 	}
 }
+
+stage ('Deploy'){
+	node('testEnv'){
+		sh "echo Deploying services ..."
+		sh ""
+		waitUntil {
+			// Wait until app is up and running
+			try {
+					//sh 'timeout 240 wget --retry-connrefused --tries=240 --waitretry=10 http://localhost:8181/WebGoat/login' // -o /dev/null
+					return true
+				} catch (exception) {
+					return false
+					}
+		}
+
+	}
+}
