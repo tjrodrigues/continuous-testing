@@ -3,7 +3,7 @@ stage ('Deploy'){
 			"Service deployment" : { 
 				node ('testEnv') {                          
 					sh "echo Deploying services ..."
-					sh "spring-petclinic-reactjs-master/deploy/deploy-services.sh 192.168.3.11:8081 1.4.${BUILD_NUMBER}"
+					sh "spring-petclinic-reactjs-master/deploy/deploy-services.sh 192.168.3.11:8081 1.4.42"
 					waitUntil {
 						// Wait until app is up and running
 						try {
