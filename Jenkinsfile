@@ -3,7 +3,7 @@ stage ('Build'){
 		sh "echo Checking out and build solution..."
 		git 'https://github.com/tjrodrigues/continuous-testing.git'
 		withMaven(maven: 'maven3') {
-			sh "cd ${WORKSPACE}/spring-petclinic-reactjs-master"
+			sh "cd ${WORKSPACE}/spring-petclinic-angulargs-master"
 			sh "./mvnw clean install -DskipTests"
 		}
 	}
@@ -15,7 +15,7 @@ stage('Unit Test & Satic Analysis') {
 			node ('testEnv') {                          
 				sh "echo Executing Unit tests..." 
 				withMaven(maven: 'maven3') {
-					sh "cd ${WORKSPACE}/spring-petclinic-reactjs-master"
+					sh "cd ${WORKSPACE}/spring-petclinic-angulargs-master"
 					sh "./mvnw test"
 				}
 			} 
@@ -26,7 +26,7 @@ stage('Unit Test & Satic Analysis') {
 				git 'https://github.com/tjrodrigues/continuous-testing.git'
 				withSonarQubeEnv('SonarQube'){
 					withMaven(maven: 'maven3'){
-						sh "cd ${WORKSPACE}/spring-petclinic-reactjs-master"
+						sh "cd ${WORKSPACE}/spring-petclinic-angulargs-master"
 						sh "./mvnw install -DskipTests $SONAR_MAVEN_GOAL -Dsonar.host.url=$SONAR_HOST_URL"
 					}
 				} 
