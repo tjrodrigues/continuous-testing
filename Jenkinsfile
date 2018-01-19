@@ -1,3 +1,13 @@
+stage ('Build'){
+	node('testEnv'){
+		sh "echo Checking out and build solution..."
+		git 'https://github.com/tjrodrigues/continuous-testing.git'
+		withMaven(maven: 'maven3') {
+			sh "mvn clean install -f spring-petclinic-reactjs-master/pom.xml -DskipTests"
+		}
+	}
+}
+
 stage ('Deploy'){
 	parallel (
 			"Service deployment" : { 
