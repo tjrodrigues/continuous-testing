@@ -3,7 +3,8 @@ stage ('Build'){
 		sh "echo Checking out and build solution..."
 		git 'https://github.com/tjrodrigues/continuous-testing.git'
 		withMaven(maven: 'maven3') {
-			sh "mvn clean install -f spring-petclinic-angularjs-master/spring-petclinic-server/pom.xml -DskipTests"
+			sh "cd ${WORKSPACE}/spring-petclinic-reactjs-master"
+			sh "./mvnw clean install -DskipTests"
 		}
 	}
 }
@@ -14,9 +15,9 @@ stage('Unit Test & Satic Analysis') {
 			node ('testEnv') {                          
 				sh "echo Executing Unit tests..." 
 				withMaven(maven: 'maven3') {
-					sh "mvn test -f spring-petclinic-reactjs-master/pom.xml"
+					sh "cd ${WORKSPACE}/spring-petclinic-reactjs-master"
+					sh "./mvnw test"
 				}
-				//junit 'webgoat-container/target/surefire-reports/*.xml'
 			} 
 		},
 		"SonarQube" : { 
@@ -25,8 +26,8 @@ stage('Unit Test & Satic Analysis') {
 				git 'https://github.com/tjrodrigues/continuous-testing.git'
 				withSonarQubeEnv('SonarQube'){
 					withMaven(maven: 'maven3'){
-						sh "mvn install -f spring-petclinic-angularjs-master/spring-petclinic-server/pom.xml -DskipTests $SONAR_MAVEN_GOAL -Dsonar.host.url=$SONAR_HOST_URL"
-						sh "mvn clean install -f spring-petclinic-angularjs-master/spring-petclinic-client/pom.xml -DskipTests $SONAR_MAVEN_GOAL -Dsonar.host.url=$SONAR_HOST_URL"
+						sh "cd ${WORKSPACE}/spring-petclinic-reactjs-master"
+						sh "./mvnw install -DskipTests $SONAR_MAVEN_GOAL -Dsonar.host.url=$SONAR_HOST_URL"
 					}
 				} 
 			} 
@@ -45,11 +46,11 @@ stage ('Packaging'){
 stage ('Deploy'){
 	node('testEnv'){
 		sh "echo Deploying services ..."
-		sh "spring-petclinic-angularjs-master/deploy/deploy.sh 192.168.3.11:8081 1.4.${BUILD_NUMBER}"
+		sh "${WORKSPACE}/spring-petclinic-angularjs-master/deploy/deploy.sh 192.168.3.11:8081 1.4.${BUILD_NUMBER}"
 		waitUntil {
 			// Wait until app is up and running
 			try {
-				sh 'timeout 240 wget --retry-connrefused --tries=240 --waitretry=10 http://localhost:8080/api/pettypes' // -o /dev/null
+				//sh 'timeout 240 wget --retry-connrefused --tries=240 --waitretry=10 http://localhost:8080/api/pettypes' // -o /dev/null
 				return true
 				} catch (exception) {
 					return false
