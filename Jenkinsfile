@@ -3,11 +3,11 @@ stage ('Deploy'){
 			"Service deployment" : { 
 				node ('testEnv') {                          
 					sh "echo Deploying services ..."
-					sh "spring-petclinic-reactjs-master/deploy/deploy-services.sh 192.168.3.11:8081 1.4.42"
+					sh "spring-petclinic-reactjs-master/deploy/deploy-services.sh 192.168.3.11:8081 1.4.38"
 					waitUntil {
 						// Wait until app is up and running
 						try {
-							sh 'timeout 15 wget --retry-connrefused --tries=25 --waitretry=10 http://localhost:8080/api/pettypes' // -o /dev/null
+							//sh 'timeout 120 bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' 192.168.3.11:8080/api/pettypes)" != "200" ]]; do sleep 5; done''
 							return true
 							} catch (exception) {
 								return false
@@ -22,7 +22,7 @@ stage ('Deploy'){
 					waitUntil {
 						// Wait until app is up and running
 						try {
-							sh 'timeout 15 wget --retry-connrefused --tries=25 --waitretry=10 http://localhost:4444' // -o /dev/null
+							//sh 'timeout 120 bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' 192.168.3.11:8080/api/pettypes)" != "200" ]]; do sleep 5; done''
 							return true
 							} catch (exception) {
 								return false
