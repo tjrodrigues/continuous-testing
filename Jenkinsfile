@@ -3,8 +3,8 @@ stage ('Build'){
 		sh "echo Checking out and build solution..."
 		git 'https://github.com/tjrodrigues/continuous-testing.git'
 		withMaven(maven: 'maven3') {
-			sh "cd ${WORKSPACE}/spring-petclinic-angularjs-master"
-			sh "./mvnw clean install -DskipTests"
+			sh '''cd spring-petclinic-angularjs
+				./mvnw clean install -DskipTests'''
 		}
 	}
 }
