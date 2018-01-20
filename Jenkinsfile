@@ -4,7 +4,7 @@ stage ('Build'){
 		git 'https://github.com/tjrodrigues/continuous-testing.git'
 		withMaven(maven: 'maven3') {
 			sh '''cd ${WORKSPACE}/spring-petclinic-angularjs-master
-				./mvnw clean install -DskipTests -e'''
+				./mvnw clean install -DskipTests -e --allow-root'''
 		}
 	}
 }
