@@ -51,10 +51,13 @@
 						</goals>
 					</execution>
 					<execution>
-						<id>bower install --allow-root</id>
+						<id>bower install</id>
 						<goals>
 							<goal>bower</goal>
 						</goals>
+						<configuration>
+							<arguments>install --allow-root</arguments>
+						</configuration>
 					</execution>
 					<execution>
 						<id>gulp build</id>
