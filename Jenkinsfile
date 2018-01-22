@@ -48,7 +48,7 @@ stage ('Packaging'){
 stage ('Deploy'){
 	node('testEnv'){
 		sh "echo Deploying services ..."
-		sh "${WORKSPACE}/spring-petclinic-angularjs-master/deploy/deploy.sh 192.168.3.11:8081 2.0.${BUILD_NUMBER}"
+		sh "${WORKSPACE}/spring-petclinic-angularjs-master/deploy/deploy.sh 192.168.3.11:8081 2.0.${BUILD_NUMBER} ${WORKSPACE}"
 		waitUntil {
 			// Wait until app is up and running
 			try {
