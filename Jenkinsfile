@@ -52,7 +52,7 @@ stage ('Deploy'){
 		waitUntil {
 			// Wait until app is up and running
 			try {
-				//sh 'timeout 240 wget --retry-connrefused --tries=240 --waitretry=10 http://localhost:8080/api/pettypes' // -o /dev/null
+				sh 'timeout 30 wget --retry-connrefused --tries=30 --waitretry=10 http://192.168.3.11:8080' // -o /dev/null
 				return true
 				} catch (exception) {
 					return false
