@@ -47,6 +47,9 @@ stage ('Packaging'){
 
 stage ('Deploy'){
 	node('testEnv'){
+		sh "echo Stopping previous deployments ..."
+		sh "pgrep -f wrapper | sudo xargs kill"
+		sh "pgrep -f mvnw | sudo xargs kill"
 		sh "echo Deploying services ..."
 		sh "${WORKSPACE}/spring-petclinic-angularjs-master/deploy/deploy.sh 192.168.3.11:8081 2.0.${BUILD_NUMBER} ${WORKSPACE}"
 		waitUntil {
