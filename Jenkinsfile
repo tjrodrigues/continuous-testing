@@ -14,10 +14,10 @@ stage('Unit Test & Satic Analysis') {
 		"Unit Test" : { 
 			node ('testEnv') {                          
 				sh "echo Executing Unit tests..." 
-				#withMaven(maven: 'maven3') {
-				#	sh '''cd ${WORKSPACE}/spring-petclinic-angularjs-master
-				#	./mvnw test'''
-				#}
+				//withMaven(maven: 'maven3') {
+				//	sh '''cd ${WORKSPACE}/spring-petclinic-angularjs-master
+				//	./mvnw test'''
+				//}
 			} 
 		},
 		"SonarQube" : { 
