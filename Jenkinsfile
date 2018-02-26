@@ -15,7 +15,7 @@ stage('Unit Test & Satic Analysis') {
 			node ('testEnv') {                          
 				sh "echo Executing Unit tests..." 
 				//withMaven(maven: 'maven3') {
-				//	sh '''cd ${WORKSPACE}/spring-petclinic-angularjs-master
+				// 	sh '''cd ${WORKSPACE}/spring-petclinic-angularjs-master
 				//	./mvnw test'''
 				//}
 			} 
