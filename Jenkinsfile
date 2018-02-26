@@ -2,10 +2,10 @@ stage ('Build'){
 	node('testEnv'){
 		sh "echo Checking out and build solution..."
 		git 'https://github.com/tjrodrigues/continuous-testing.git'
-#		withMaven(maven: 'maven3') {
-#			sh '''cd ${WORKSPACE}/spring-petclinic-angularjs-master
-#				./mvnw clean install -DskipTests'''
-#		}
+//		withMaven(maven: 'maven3') {
+//			sh '''cd ${WORKSPACE}/spring-petclinic-angularjs-master
+//				./mvnw clean install -DskipTests'''
+//		}
 	}
 }
 
