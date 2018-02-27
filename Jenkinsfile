@@ -38,7 +38,7 @@ stage('Unit Test & Satic Analysis') {
 stage ('Packaging'){
 	node('testEnv'){
 		sh "echo Create distribution package and save it to Nexus"
-		sh '''cd ${WORKSPACE}
+		//sh '''cd ${WORKSPACE}
 		//sudo tar -czvf spring-petclinic-angularjs-master.tar.gz spring-petclinic-angularjs-master/'''
 		//nexusArtifactUploader artifacts: [[artifactId: 'petclinic', classifier: '', file: "${WORKSPACE}/spring-petclinic-angularjs-master.tar.gz", type: 'tar.gz']], credentialsId: 'Nexus', groupId: 'org.criticalsoftware.sspa', nexusUrl: '192.168.3.11:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-releases', version: "2.0.${BUILD_NUMBER}"
 
