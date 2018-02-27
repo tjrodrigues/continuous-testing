@@ -26,7 +26,7 @@ stage('Unit Test & Satic Analysis') {
 				git 'https://github.com/tjrodrigues/continuous-testing.git'
 				withSonarQubeEnv('SonarQube'){
 					withMaven(maven: 'maven3'){
-						sh '''cd ${WORKSPACE}/spring-petclinic-angularjs-master
+					//	sh '''cd ${WORKSPACE}/spring-petclinic-angularjs-master
 					//	./mvnw install -DskipTests $SONAR_MAVEN_GOAL -Dsonar.host.url=$SONAR_HOST_URL'''
 					}
 				} 
