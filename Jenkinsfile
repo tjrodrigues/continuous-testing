@@ -54,7 +54,8 @@ stage ('Deploy'){
 		//sh "${WORKSPACE}/spring-petclinic-angularjs-master/deploy/deploy.sh 192.168.3.11:8081 2.0.${BUILD_NUMBER} ${WORKSPACE}"
 		sh "${WORKSPACE}/spring-petclinic-angularjs-master/deploy/deploy.sh 192.168.3.11:8081 2.0.1 ${WORKSPACE}"
 		sh ''' cd ${WORKSPACE}/app-deploy/spring-petclinic-angularjs-master/
-		sudo JENKINS_NODE_COOKIE=dontKillMe nohup mvnw spring-boot:run &'''
+		export JENKINS_NODE_COOKIE=dontKillMe
+		sudo nohup mvnw spring-boot:run &'''
 		waitUntil {
 			// Wait until app is up and running
 			try {
