@@ -10,5 +10,5 @@ sudo tar -xvf $3/app-deploy/petclinic-$2.tar.gz -C $3/app-deploy
 cd $3/app-deploy/spring-petclinic-angularjs-master
 sudo chmod -R +x ./*
 //sudo ./mvnw clean install
-//cd $3/app-deploy/spring-petclinic-angularjs-master/spring-petclinic-server
-//sudo nohup ../mvnw spring-boot:run &
+cd $3/app-deploy/spring-petclinic-angularjs-master/spring-petclinic-server
+sudo nohup ../mvnw spring-boot:run &
