@@ -58,7 +58,7 @@ stage ('Deploy'){
 		sudo nohup ./mvnw spring-boot:run &'''
 		//waitUntil {
 			// Wait until app is up and running
-			//try {
+		    //try {
 				//sh 'timeout 30 wget --retry-connrefused --tries=15 --waitretry=10 http://192.168.3.11:8080' // -o /dev/null
 				//return true
 				//} catch (exception) {
