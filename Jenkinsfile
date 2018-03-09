@@ -60,7 +60,7 @@ stage ('Deploy'){
 			// Wait until app is up and running
 		    try {
 					sh 'timeout 30 wget --retry-connrefused --tries=10 --waitretry=10 http://192.168.3.11:8080' // -o /dev/null
-					return true
+					return true 
 				} catch (exception) {
 				    return false
 				}
