@@ -1,7 +1,7 @@
 stage ('Build'){
 	node('testEnv'){
 		//sh "echo Checking out and build solution..."
-		//git 'https://github.com/tjrodrigues/continuous-testing.git'
+		git 'https://github.com/tjrodrigues/continuous-testing.git'
 		//withMaven(maven: 'maven3') {
 			//sh '''cd ${WORKSPACE}/spring-petclinic-angularjs-master
 				//./mvnw clean install -DskipTests'''
@@ -63,6 +63,28 @@ stage ('Deploy'){
 		}
 	}
 }
+
+stage('Functional Tests') {
+	parallel (
+		"Robot Framework Web" : { 
+			node ('testEnv') {                          
+				//build job: 'Web-AutTests', propagate: false
+			} 
+		},
+		"SoapUI API" : { 
+		node ('testEnv') { 
+				//build job: 'API-AutTests', propagate: false 
+				sh '${WORKSPACE}/spring-petclinic-angularjs-master/tests/api/run-soapui-tests.sh /home/ubuntu/SoapUI-5.4.0 http://192.168.3.11:8080 ${WORKSPACE}/spring-petclinic-angularjs-master/tests/api/Spring-PetClinic-soapui-project.xml ${WORKSPACE}/spring-petclinic-angularjs-master/tests/api/_test_reports/'
+				junit 'spring-petclinic-angularjs-master/tests/api/_test_reports/*.xml'
+			} 
+		},
+		"Robot Framework Mobile" : { 
+			node ('testEnv') {                          
+			} 
+		}
+	)
+}
+
 
 stage ('Performance Testing'){
 	node('testEnv'){
