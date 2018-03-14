@@ -77,8 +77,8 @@ stage('Functional Tests') {
 		"SoapUI API" : { 
 		node ('testEnv') { 
 				//build job: 'API-AutTests', propagate: false 
-				sh '${WORKSPACE}/spring-petclinic-angularjs-master/tests/api/run-soapui-tests.sh /home/ubuntu/SoapUI-5.4.0 http://192.168.3.11:8080 ${WORKSPACE}/spring-petclinic-angularjs-master/tests/api/Spring-PetClinic-soapui-project.xml ${WORKSPACE}/spring-petclinic-angularjs-master/tests/api/_test_reports/'
-				junit 'spring-petclinic-angularjs-master/tests/api/_test_reports/*.xml'
+				//sh '${WORKSPACE}/spring-petclinic-angularjs-master/tests/api/run-soapui-tests.sh /home/ubuntu/SoapUI-5.4.0 http://192.168.3.11:8080 ${WORKSPACE}/spring-petclinic-angularjs-master/tests/api/Spring-PetClinic-soapui-project.xml ${WORKSPACE}/spring-petclinic-angularjs-master/tests/api/_test_reports/'
+				//junit 'spring-petclinic-angularjs-master/tests/api/_test_reports/*.xml'
 			} 
 		},
 		"Robot Framework Mobile" : { 
@@ -92,6 +92,6 @@ stage('Functional Tests') {
 stage ('Performance Testing'){
 	node('testEnv'){
 		sh "echo Running jMeter tests ..."
-		bzt 'spring-petclinic-angularjs-master/tests/performance/performance-test-suite.jmx'
+		//bzt 'spring-petclinic-angularjs-master/tests/performance/performance-test-suite.jmx'
 	}
 }
