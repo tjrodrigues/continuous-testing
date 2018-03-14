@@ -68,7 +68,7 @@ stage('Functional Tests') {
 	parallel (
 		"Robot Framework Web" : { 
 			node ('rfBox') {                          
-				bat '''cd $WORSPACE\\spring-petclinic-angularjs-master\\tests\\rf
+				bat '''cd $WORKSPACE\\spring-petclinic-angularjs-master\\tests\\rf
 				pybot -v HOMEPAGE:http://192.168.3.11:8080 tests\\web-tests.robot'''
 
 				
