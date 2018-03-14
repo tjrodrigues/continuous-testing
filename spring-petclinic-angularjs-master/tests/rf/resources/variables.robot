@@ -9,7 +9,7 @@ Library           Selenium2Library    # External Libraries
 *** Variables ***
 # Application Settings
 ${HOMEPAGE}       ${baseURL}
-${BROWSER}        firefox
+${BROWSER}        chrome
 ${DURATION}       30s
 ${RETRY}          2s
 ################################################ Variables ########################################################
