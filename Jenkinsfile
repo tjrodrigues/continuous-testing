@@ -71,6 +71,15 @@ stage('Functional Tests') {
 				git 'https://github.com/tjrodrigues/continuous-testing.git'
 				bat '''cd %WORKSPACE%\\spring-petclinic-angularjs-master\\tests\\rf
 				pybot -v HOMEPAGE:http://192.168.3.11:8080 tests\\web-tests.robot'''
+				step([$class: 'RobotPublisher',
+				  disableArchiveOutput: false,
+				  logFileName: 'log.html',
+				  otherFiles: '',
+				  outputFileName: 'output.xml',
+				  outputPath: '%WORKSPACE%\\spring-petclinic-angularjs-master\\tests\\rf',
+				  passThreshold: 100,
+				  reportFileName: 'report.html',
+				  unstableThreshold: 0]);
 
 				
 			} 
