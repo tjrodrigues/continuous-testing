@@ -76,7 +76,7 @@ stage('Functional Tests') {
 				  logFileName: 'log.html',
 				  otherFiles: '',
 				  outputFileName: 'output.xml',
-				  outputPath: '${WORKSPACE}\\spring-petclinic-angularjs-master\\tests\\rf',
+				  outputPath: 'spring-petclinic-angularjs-master\\tests\\rf',
 				  passThreshold: 100,
 				  reportFileName: 'report.html',
 				  unstableThreshold: 0]);
