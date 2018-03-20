@@ -115,7 +115,7 @@ stage ('Security Testing'){
 
 stage ('Deployment (Production)'){
 	input 'Do you approve deployment?'
-	node('ProjectBuildEnv'){
+	node('testEnv'){
 		//deploy things
 	}
 }
