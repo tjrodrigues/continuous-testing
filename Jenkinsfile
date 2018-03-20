@@ -13,23 +13,23 @@ stage('Unit Test & Satic Analysis') {
 	parallel (
 		"Unit Test" : { 
 			node ('testEnv') {                          
-				//sh "echo Executing Unit tests..." 
-				//withMaven(maven: 'maven3') {
-				  //sh '''cd ${WORKSPACE}/spring-petclinic-angularjs-master
-					//./mvnw test'''
-				//}
+				sh "echo Executing Unit tests..." 
+				withMaven(maven: 'maven3') {
+				  sh '''cd ${WORKSPACE}/spring-petclinic-angularjs-master
+					./mvnw test'''
+				}
 			} 
 		},
 		"SonarQube" : { 
 			node ('testEnv') {   
-				//sh "echo Executing SonarQube Analysis..." 
-				//git 'https://github.com/tjrodrigues/continuous-testing.git'
-				//withSonarQubeEnv('SonarQube'){
-					//withMaven(maven: 'maven3'){
-						//sh '''cd ${WORKSPACE}/spring-petclinic-angularjs-master
-						//./mvnw install -DskipTests $SONAR_MAVEN_GOAL -Dsonar.host.url=$SONAR_HOST_URL'''
-					//}
-				//} 
+				sh "echo Executing SonarQube Analysis..." 
+				git 'https://github.com/tjrodrigues/continuous-testing.git'
+				withSonarQubeEnv('SonarQube'){
+					withMaven(maven: 'maven3'){
+						sh '''cd ${WORKSPACE}/spring-petclinic-angularjs-master
+						./mvnw install -DskipTests $SONAR_MAVEN_GOAL -Dsonar.host.url=$SONAR_HOST_URL'''
+					}
+				} 
 			} 
 		}
 	)
@@ -116,6 +116,7 @@ stage ('Security Testing'){
 stage ('Deployment (Production)'){
 	input 'Do you approve deployment?'
 	node('testEnv'){
+		 return true
 		//deploy things
 	}
 }
