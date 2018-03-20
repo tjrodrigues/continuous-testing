@@ -80,7 +80,7 @@ stage('Functional Tests') {
 				  passThreshold: 100,
 				  reportFileName: 'report.html',
 				  unstableThreshold: 0]);
-
+				  publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '%WORKSPACE%\\\\spring-petclinic-angularjs-master\\\\tests\\\\rf', reportFiles: 'report.html', reportName: 'HTML Report', reportTitles: ''])
 				
 			} 
 		},
