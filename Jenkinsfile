@@ -16,7 +16,9 @@ stage('Unit Test & Satic Analysis') {
 				sh "echo Executing Unit tests..." 
 				withMaven(maven: 'maven3') {
 				  sh '''cd ${WORKSPACE}/spring-petclinic-angularjs-master
-					./mvnw test'''
+					./mvnw test
+					'''
+					junit 'spring-petclinic-angularjs-master/spring-petclinic-server/target/surefire-report/*.xml'
 				}
 			} 
 		},
