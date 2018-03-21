@@ -39,8 +39,8 @@ stage ('Packaging'){
 	node('testEnv'){
 		sh "echo Create distribution package and save it to Nexus"
 		//sh '''cd ${WORKSPACE}
-		//sudo tar -czvf spring-petclinic-angularjs-master.tar.gz spring-petclinic-angularjs-master/'''
-		//nexusArtifactUploader artifacts: [[artifactId: 'petclinic', classifier: '', file: "${WORKSPACE}/spring-petclinic-angularjs-master.tar.gz", type: 'tar.gz']], credentialsId: 'Nexus', groupId: 'org.criticalsoftware.sspa', nexusUrl: '192.168.3.11:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-releases', version: "2.0.${BUILD_NUMBER}"
+		sudo tar -czvf spring-petclinic-angularjs-master.tar.gz spring-petclinic-angularjs-master/'''
+		nexusArtifactUploader artifacts: [[artifactId: 'petclinic', classifier: '', file: "${WORKSPACE}/spring-petclinic-angularjs-master.tar.gz", type: 'tar.gz']], credentialsId: 'Nexus', groupId: 'org.criticalsoftware.sspa', nexusUrl: '192.168.3.11:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-releases', version: "2.0.${BUILD_NUMBER}"
 
 	}
 }
@@ -48,10 +48,10 @@ stage ('Packaging'){
 stage ('Deploy'){
 	node('testEnv'){
 		sh "echo Stopping previous deployments ..."
-		//sh "pgrep -f wrapper | sudo xargs kill -9"
-		//sh "pgrep -f mvnw | sudo xargs kill -9"
-		//sh "echo Deploying services ..."
-		//sh "${WORKSPACE}/spring-petclinic-angularjs-master/deploy/deploy.sh 192.168.3.11:8081 2.0.${BUILD_NUMBER} ${WORKSPACE}"
+		sh "pgrep -f wrapper | sudo xargs kill -9"
+		sh "pgrep -f mvnw | sudo xargs kill -9"
+		sh "echo Deploying services ..."
+		sh "${WORKSPACE}/spring-petclinic-angularjs-master/deploy/deploy.sh 192.168.3.11:8081 2.0.${BUILD_NUMBER} ${WORKSPACE}"
 		waitUntil {
 			// Wait until app is up and running
 		    try {
@@ -92,7 +92,8 @@ stage('Functional Tests') {
 			} 
 		},
 		"Robot Framework Mobile" : { 
-			node ('testEnv') {                          
+			node ('testEnv') {  
+				return true			
 			} 
 		}
 	)
