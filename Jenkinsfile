@@ -18,7 +18,7 @@ stage('Unit Test & Satic Analysis') {
 				  sh '''cd ${WORKSPACE}/spring-petclinic-angularjs-master
 					./mvnw test
 					'''
-					junit 'spring-petclinic-angularjs-master/spring-petclinic-server/target/surefire-report/*.xml'
+					//junit 'spring-petclinic-angularjs-master/spring-petclinic-server/target/surefire-report/*.xml'
 				}
 			} 
 		},
