@@ -98,25 +98,3 @@ stage('Functional Tests') {
 		}
 	)
 }
-
-
-stage ('Performance Testing'){
-	node('testEnv'){
-		sh "echo Running jMeter tests ..."
-		bzt 'spring-petclinic-angularjs-master/tests/performance/performance-test-suite.jmx'
-	}
-}
-
-stage ('Security Testing'){
-	node('testEnv'){
-		sh "echo Running AppScan tests ..."
-		//bzt 'spring-petclinic-angularjs-master/tests/performance/performance-test-suite.jmx'
-	}
-}
-
-stage ('Deployment (Production)'){
-	input 'Do you approve deployment?'
-	node('testEnv'){
-		//deploy things
-	}
-}
