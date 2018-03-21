@@ -38,7 +38,7 @@ stage('Unit Test & Satic Analysis') {
 stage ('Packaging'){
 	node('testEnv'){
 		sh "echo Create distribution package and save it to Nexus"
-		//sh '''cd ${WORKSPACE}
+		sh '''cd ${WORKSPACE}
 		sudo tar -czvf spring-petclinic-angularjs-master.tar.gz spring-petclinic-angularjs-master/'''
 		nexusArtifactUploader artifacts: [[artifactId: 'petclinic', classifier: '', file: "${WORKSPACE}/spring-petclinic-angularjs-master.tar.gz", type: 'tar.gz']], credentialsId: 'Nexus', groupId: 'org.criticalsoftware.sspa', nexusUrl: '192.168.3.11:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-releases', version: "2.0.${BUILD_NUMBER}"
 
@@ -69,8 +69,8 @@ stage('Functional Tests') {
 		"Robot Framework Web" : { 
 			node ('rfBox') {            
 				git 'https://github.com/tjrodrigues/continuous-testing.git'
-				bat 'cd %WORKSPACE%\\spring-petclinic-angularjs-master\\tests\\rf' 
-				bat 'pybot -v HOMEPAGE:http://192.168.3.11:8080 tests\\web-tests.robot'
+				bat '''cd %WORKSPACE%\\spring-petclinic-angularjs-master\\tests\\rf 
+				pybot -v HOMEPAGE:http://192.168.3.11:8080 tests\\web-tests.robot'''
 
 				step([$class: 'RobotPublisher',
 				  disableArchiveOutput: false,
@@ -93,8 +93,35 @@ stage('Functional Tests') {
 			} 
 		},
 		"Robot Framework Mobile" : { 
-			node ('testEnv') {  			
+			node ('testEnv') {  
+				return true			
 			} 
 		}
 	)
 }
+
+
+stage ('Performance Testing'){
+	node('testEnv'){
+		sh "echo Running jMeter tests ..."
+		bzt 'spring-petclinic-angularjs-master/tests/performance/performance-test-suite.jmx'
+	}
+}
+
+stage ('Security Testing'){
+	node('testEnv'){
+		sh "echo Running AppScan tests ..."
+		//bzt 'spring-petclinic-angularjs-master/tests/performance/performance-test-suite.jmx'
+	}
+}
+
+stage ('Deployment (Production)'){
+	input 'Do you approve deployment?'
+	node('testEnv'){
+		 return true
+		//deploy things
+	}
+}
+
+
+
