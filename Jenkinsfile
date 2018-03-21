@@ -93,8 +93,7 @@ stage('Functional Tests') {
 			} 
 		},
 		"Robot Framework Mobile" : { 
-			node ('testEnv') {  
-				return true			
+			node ('testEnv') {  			
 			} 
 		}
 	)
@@ -118,7 +117,6 @@ stage ('Security Testing'){
 stage ('Deployment (Production)'){
 	input 'Do you approve deployment?'
 	node('testEnv'){
-		 return true
 		//deploy things
 	}
 }
